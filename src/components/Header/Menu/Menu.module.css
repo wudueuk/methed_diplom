@@ -1,0 +1,30 @@
+.menu {
+  display: flex;
+}
+
+.item {
+  margin-right: 30px;
+}
+
+.item:last-child {
+  margin-right: 0;
+}
+
+.link {
+  color: #FFF;
+  text-decoration: none;
+}
+
+.exit {
+  position: relative;
+}
+
+.exit::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: -20px;
+  top: 3px;
+  background: url('./img/exit.svg') no-repeat center center;
+}

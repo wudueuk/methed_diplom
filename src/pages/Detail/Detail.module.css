@@ -1,0 +1,68 @@
+.detail {
+  width: 100%;
+  margin: 40px 0px;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 26px;
+}
+
+.back {
+  width: 178px;
+  height: 49px;
+}
+
+.detailInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.transitionTitle {
+  font-size: 26px;
+  margin-bottom: 40px;
+}
+
+.transition {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.label {
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.input {
+  width: 380px;
+  margin-bottom: 20px;
+  height: 70px;
+  background-color: #FFF;
+  border: 2px solid #FFF;
+  border-radius: 10px;
+  padding: 10px 5px;
+  font-size: 36px;
+}
+
+.input:focus,
+.input:hover {
+  border: 2px solid #B865D6;
+}
+
+.submit {
+  font-size: 18px;
+  width: 380px;
+  height: 70px;
+}

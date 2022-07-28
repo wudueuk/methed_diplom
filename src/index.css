@@ -1,13 +1,91 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "~normalize.css";
+
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""),
+    url("fonts/Nunito-Regular.woff2") format("woff2"),
+    url("fonts/Nunito-Regular.woff") format("woff");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  src: local(""),
+    url("fonts/Nunito-SemiBold.woff2") format("woff2"),
+    url("fonts/Nunito-SemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  src: local(""),
+    url("fonts/Nunito-Bold.woff2") format("woff2"),
+    url("fonts/Nunito-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 700;
+  src: local(""),
+    url("fonts/Comfortaa-Bold.woff2") format("woff2"),
+    url("fonts/Comfortaa-Bold.woff") format("woff");
+}
+
+html {
+  position: relative;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #210B36;
+  color: #FFFFFF;
+  font-family: Nunito, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+h2,
+h3 {
+  font-family: Comfortaa, sans-serif;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+
+h4 {
+  font-family: Nunito, sans-serif;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.container {
+  max-width: 1220px;
+  margin: 0px auto;
+  padding: 0px 10px;
+}
+
+.mainmenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

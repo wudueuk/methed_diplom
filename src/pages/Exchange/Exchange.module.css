@@ -1,0 +1,117 @@
+.exchange {
+  width: 100%;
+  margin: 40px 0px;
+}
+
+.title {
+  font-size: 26px;
+}
+
+.inner {
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.innerBlock {
+  background-color: #392350;
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.box {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.innerTitle {
+  font-size: 20px;
+}
+
+.realChange {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.realChangeLine {
+  margin-bottom: 20px;
+}
+
+.currencyLine {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.currencyPair {
+  flex: 0 0 auto;
+}
+
+.underline {
+  flex: 1 0 auto;
+  border-bottom: 1px solid #210B36;
+}
+
+.currencyDelta {
+  flex: 0 0 auto;
+}
+
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.balance {
+  padding: 20px;
+}
+
+.balanceTitle {
+  font-size: 15px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.label {
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.select,
+.input {
+  width: 160px;
+  margin-bottom: 20px;
+  height: 37px;
+  background-color: #FFF;
+  border: 2px solid #FFF;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.input:focus,
+.input:hover {
+  border: 2px solid #B865D6;
+}
+
+.left {
+  position: relative;
+  height: 37px;
+}
+
+.submit {
+  position: absolute;
+  font-size: 18px;
+  width: 147px;
+  height: 37px;
+  right: 0px;
+  bottom: 0px;
+}
