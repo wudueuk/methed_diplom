@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {API_URL} from '../../api/const';
-import {updateToken} from '../../store/tokenReducer';
+import {updateToken} from '../../store/token/tokenReducer';
 import {updateUser} from '../../store/userReducer';
 import {useEffect, useState} from 'react';
 import CircleLoader from 'react-spinners/CircleLoader';
@@ -54,7 +54,7 @@ export const Auth = () => {
         error ? (<>
           <h2 className={style.error}>Ошибка</h2>
           <p>{error.message}</p>
-        </>) : (<CircleLoader color='#FFF' size='250'
+        </>) : (<CircleLoader color='#FFF' size='250px'
           cssOverride={override} />)
       }
     </>

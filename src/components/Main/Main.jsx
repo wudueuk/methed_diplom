@@ -17,7 +17,7 @@ export const Main = () => (
           <Route index element={<Accounts />} />
           <Route path='login' element={<Login />} />
           <Route path='accounts' element={<Accounts />} />
-          <Route path='detail' element={<Detail />} />
+          <Route path='accounts/:id' element={<Detail />} />
           <Route path='exchange' element={<Exchange />} />
           <Route path='exit' element={<Exit />} />
           <Route path='auth' element={<Auth />} />
