@@ -39,12 +39,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .group {
   display: flex;
   flex-direction: column;
   padding: 0;
+  flex: 0 1 auto;
 }
 
 .label {
@@ -53,7 +55,7 @@
 }
 
 .input {
-  width: 380px;
+  width: 100%;
   margin-bottom: 20px;
   height: 70px;
   background-color: #FFF;

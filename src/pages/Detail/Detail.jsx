@@ -13,6 +13,8 @@ export const Detail = () => {
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
   const [account, setAccount] = useState(null);
+  const [accountChange, setAccountChange] = useState(null);
+  const [amount, setAmount] = useState(null);
 
   const goBack = () => navigate(-1);
 
@@ -25,12 +27,64 @@ export const Detail = () => {
         },
       })
       .then(({data}) => {
-        console.log('data: ', data);
         setLoaded(true);
         setAccount(data.payload);
       })
       .catch((err) => ({error: err.toString()}));
   }, [id]);
+
+  const handleAccountChange = (e) => {
+    setAccountChange(e.target.value);
+  };
+
+  const handleAmountChange = (e) => {
+    setAmount(e.target.value);
+  };
+
+  const transfert = () => {
+    axios({
+      method: 'post',
+      url: `${API_URL}/transfer-funds`,
+      params: {
+        from: id,
+        to: accountChange,
+        amount,
+      },
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+      .then(({data}) => {
+        let message = '';
+        if (data.payload) {
+          message = 'Перевод успешно осуществлен';
+        } else if (data.error) {
+          switch (data.error) {
+            case 'Invalid account from':
+              message = `Не указан адрес счёта списания,
+              или этот счёт не принадлежит нам`;
+              break;
+            case 'Invalid account to':
+              message = `Не указан счёт зачисления, или этого счёта
+              не существует`;
+              break;
+            case 'Invalid amount':
+              message = `Не указана сумма перевода, или она
+              отрицательная`;
+              break;
+            case 'Overdraft prevented':
+              message = `Мы попытались перевести больше денег, чем доступно
+              на счёте списания`;
+              break;
+            default:
+              message = 'Непредвиденная ошибка!';
+          }
+        }
+        alert(message);
+        data.payload ? alert('Перевод осуществлен') : 'Error';
+      })
+      .catch((error) => console.log(error.message));
+  };
 
   return (
     <div className={style.detail}>
@@ -55,14 +109,17 @@ export const Detail = () => {
       <div className={style.transition}>
         <div className={style.group}>
           <label className={style.label}>Счет</label>
-          <input className={style.input}></input>
+          <input className={style.input}
+            onChange={handleAccountChange}></input>
         </div>
         <div className={style.group}>
           <label className={style.label}>Сумма</label>
-          <input className={style.input}></input>
+          <input className={style.input}
+            onChange={handleAmountChange}></input>
         </div>
         <div className={style.group}>
-          <Button value='Перевести' styles={style.submit} />
+          <Button value='Перевести' styles={style.submit}
+            onclick={transfert} />
         </div>
       </div>
     </div>

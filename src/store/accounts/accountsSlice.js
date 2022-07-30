@@ -13,7 +13,7 @@ export const accountsSlice = createSlice({
   initialState,
   reducers: {
     createAccount: (state, action) => {
-      state.accounts = [...state.accounts, action.account];
+      state.accounts.push(action.payload);
     },
   },
   extraReducers: {
@@ -33,4 +33,5 @@ export const accountsSlice = createSlice({
   },
 });
 
+export const {createAccount} = accountsSlice.actions;
 export default accountsSlice.reducer;

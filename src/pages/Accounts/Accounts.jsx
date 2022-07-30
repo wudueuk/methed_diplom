@@ -5,6 +5,7 @@ import Account from '../../components/Account';
 import {useDispatch, useSelector} from 'react-redux';
 import {Navigate} from 'react-router-dom';
 import {accountsRequestAsync} from '../../store/accounts/accountsAction';
+import {createAccount} from '../../store/accounts/accountsSlice';
 import CircleLoader from 'react-spinners/CircleLoader';
 import axios from 'axios';
 import {API_URL} from '../../api/const';
@@ -20,7 +21,7 @@ export const Accounts = () => {
     token ? dispatch(accountsRequestAsync()) : '';
   }, [token]);
 
-  const createAccount = () => {
+  const createNewAccount = () => {
     axios({
       method: 'post',
       url: `${API_URL}/create-account`,
@@ -28,12 +29,8 @@ export const Accounts = () => {
         Authorization: `Basic ${token}`,
       },
     })
-      .then(({
-        data: {
-          payload: {token},
-        },
-      }) => {
-        //
+      .then(({data}) => {
+        dispatch(createAccount(data.payload));
       })
       .catch((error) => console.log(error.message));
   };
@@ -50,7 +47,7 @@ export const Accounts = () => {
           <div className={style.titleBox}>
             <h2 className={style.title}>Здравствуйте, {user}!</h2>
             <Button value='Открыть новый счет' styles={style.open}
-              onclick={createAccount} />
+              onclick={createNewAccount} />
           </div>
           <div className={style.listHeader}>
             <h3 className={style.listTitle}>Мои счета</h3>

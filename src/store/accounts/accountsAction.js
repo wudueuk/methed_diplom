@@ -4,7 +4,7 @@ import {API_URL} from '../../api/const';
 
 export const accountsRequestAsync = createAsyncThunk(
   'accounts/fetch',
-  (newPage, {getState}) => {
+  (id, {getState}) => {
     const token = getState().token.token;
 
     return axios(
