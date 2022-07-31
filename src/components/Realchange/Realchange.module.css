@@ -1,0 +1,27 @@
+.realChange {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.realChangeLine {
+  margin-bottom: 20px;
+}
+
+.currencyLine {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.currencyPair {
+  flex: 0 0 auto;
+}
+
+.underline {
+  flex: 1 0 auto;
+  border-bottom: 1px solid #210B36;
+}
+
+.currencyDelta {
+  flex: 0 0 auto;
+}

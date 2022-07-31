@@ -29,35 +29,6 @@
   font-size: 20px;
 }
 
-.realChange {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.realChangeLine {
-  margin-bottom: 20px;
-}
-
-.currencyLine {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.currencyPair {
-  flex: 0 0 auto;
-}
-
-.underline {
-  flex: 1 0 auto;
-  border-bottom: 1px solid #210B36;
-}
-
-.currencyDelta {
-  flex: 0 0 auto;
-}
-
-
 .form {
   display: flex;
   justify-content: space-between;
@@ -71,6 +42,8 @@
 
 .balanceTitle {
   font-size: 15px;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .group {
@@ -107,6 +80,10 @@
   height: 37px;
 }
 
+.bold {
+  font-weight: 700;
+}
+
 .submit {
   position: absolute;
   font-size: 18px;
@@ -114,4 +91,13 @@
   height: 37px;
   right: 0px;
   bottom: 0px;
+}
+
+.userCurrenciesLi {
+  margin-bottom: 15px;
+}
+
+.userCurrencies {
+  display: inline-block;
+  width: 50px;
 }
