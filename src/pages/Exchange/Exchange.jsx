@@ -1,7 +1,7 @@
 import style from './Exchange.module.css';
 import classNames from 'classnames';
 import Button from '../../components/Button';
-/* import Realchange from '../../components/Realchange'; */
+import Realchange from '../../components/Realchange';
 import {useSelector} from 'react-redux';
 import {UserCurrencies} from '../../components/UserCurrencies/UserCurrencies';
 import {useCurrencies} from '../../hooks/useCurrencies';
@@ -21,7 +21,7 @@ export const Exchange = () => {
           <h4 className={style.innerTitle}>
             Изменение курса в режиме реального времени
           </h4>
-
+          <Realchange />
         </div>
 
         <div className={style.innerBlock}>

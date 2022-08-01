@@ -21,7 +21,7 @@ export const Menu = () => {
               <NavLink to='/exit'
                 className={classNames(style.link, style.exit)}>Выйти</NavLink>
             </li>
-          </ul >
+          </ul>
         ) : ''
       }
     </>

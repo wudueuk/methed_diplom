@@ -21,7 +21,7 @@ export const Accounts = () => {
     token ? dispatch(accountsRequestAsync()) : '';
   }, [token]);
 
-  const createNewAccount = () => {
+  const createNewAccount = async () => {
     axios({
       method: 'post',
       url: `${API_URL}/create-account`,

@@ -40,7 +40,7 @@ export const Auth = () => {
         .catch((error) => {
           setError(error);
         });
-    }
+    } else navigate('/');
   }, []);
 
   const override = {

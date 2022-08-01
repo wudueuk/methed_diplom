@@ -9,33 +9,44 @@ export const Login = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [userPasswd, setUserPasswd] = useState('');
+  const [formTitle, setFormTitle] = useState('Вход в аккаунт');
+  const [formTitleStyle, setFormTitleStyle] = useState(style.title);
 
   const handleUserChange = (e) => {
     const target = e.target;
     setUserName(target.value);
+    setFormTitle('Вход в аккаунт');
+    setFormTitleStyle(style.title);
   };
 
   const handlePasswdChange = (e) => {
     const target = e.target;
     setUserPasswd(target.value);
+    setFormTitle('Вход в аккаунт');
+    setFormTitleStyle(style.title);
   };
 
   const handleSubmit = () => {
-    console.log('Check user name and user password');
-    navigate('/auth',
-      {
-        state:
+    if (/^[A-Za-z]\w{5,}/.test(userName) &&
+      /\w{6,}/.test(userPasswd)) {
+      navigate('/auth',
         {
-          user: userName,
-          passwd: userPasswd,
-        }
-      });
+          state:
+          {
+            user: userName,
+            passwd: userPasswd,
+          }
+        });
+    } else {
+      setFormTitle('Ошибка ввода логина или пароля');
+      setFormTitleStyle(style.titleError);
+    }
   };
 
   return (<>
     {token ? navigate('/') : (
       <div className={style.body}>
-        <h2 className={style.title}>Вход в аккаунт</h2>
+        <h2 className={formTitleStyle}>{formTitle}</h2>
         <div className={style.group}>
           <label className={style.label}>Логин</label>
           <input className={style.input} name='login' type='text'

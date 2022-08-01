@@ -15,6 +15,11 @@
   font-size: 38px;
 }
 
+.titleError {
+  font-size: 30px;
+  color: tomato;
+}
+
 .group {
   display: flex;
   flex-direction: column;

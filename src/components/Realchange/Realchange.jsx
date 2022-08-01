@@ -1,8 +1,9 @@
 import style from './Realchange.module.css';
-import {useState, useRef, useEffect, useCallback} from 'react';
+import {useRef, useEffect, useCallback} from 'react';
+
+let count = 0;
 
 export const Realchange = () => {
-  const [data, setData] = useState(null);
   const ws = useRef(null);
 
   const gettingData = useCallback(() => {
@@ -10,8 +11,44 @@ export const Realchange = () => {
 
     ws.current.onmessage = e => {
       const message = JSON.parse(e.data);
-      setData(message);
-      console.log(data);
+      const change = {
+        from: message.from,
+        to: message.to,
+        rate: message.rate,
+        change: message.change,
+      };
+      if (message.type === 'EXCHANGE_RATE_CHANGE') {
+        const realChange = document.getElementById('realChange');
+
+        const realChangeLine = document.createElement('li');
+        realChangeLine.className = style.realChangeLine;
+        realChangeLine.id = `count${count}`;
+
+        const currencyLine = document.createElement('ul');
+        currencyLine.className = style.currencyLine;
+
+        const currencyPair = document.createElement('li');
+        currencyPair.className = style.currencyPair;
+        currencyPair.innerText = `${change.from}/${change.to}`;
+
+        const underline = document.createElement('li');
+        underline.className = style.underline;
+
+        const currencyDelta = document.createElement('li');
+        currencyDelta.className = change.change > 0 ?
+          style.currencyDeltaGreen : style.currencyDeltaRed;
+        currencyDelta.innerText = change.rate;
+
+        currencyLine.append(currencyPair, underline, currencyDelta);
+        realChangeLine.append(currencyLine);
+
+        realChange.prepend(realChangeLine);
+        count++;
+        if (count >= 15) {
+          const deleteLine = document.getElementById(`count${count - 15}`);
+          deleteLine.remove();
+        }
+      }
     };
   }, [ws]);
 
@@ -21,66 +58,5 @@ export const Realchange = () => {
     return () => ws.current.close();
   }, [ws]);
 
-  return (
-    <>
-      {!!data &&
-        <ul className={style.realChange}>
-          <li className={style.realChangeLine}>
-            <ul className={style.currencyLine}>
-              <li className={style.currencyPair}>AUD/BTC</li>
-              <li className={style.underline}> </li>
-              <li className={style.currencyDelta}>+4,754</li>
-            </ul>
-          </li>
-
-          <li className={style.realChangeLine}>
-            <ul className={style.currencyLine}>
-              <li className={style.currencyPair}>BTC/BYR</li>
-              <li className={style.underline}> </li>
-              <li className={style.currencyDelta}>+23,2383</li>
-            </ul>
-          </li>
-
-          <li className={style.realChangeLine}>
-            <ul className={style.currencyLine}>
-              <li className={style.currencyPair}>AUD/BTC</li>
-              <li className={style.underline}> </li>
-              <li className={style.currencyDelta}>+4,754</li>
-            </ul>
-          </li>
-
-          <li className={style.realChangeLine}>
-            <ul className={style.currencyLine}>
-              <li className={style.currencyPair}>BYR/AUD</li>
-              <li className={style.underline}> </li>
-              <li className={style.currencyDelta}>-7,34</li>
-            </ul>
-          </li>
-
-          <li className={style.realChangeLine}>
-            <ul className={style.currencyLine}>
-              <li className={style.currencyPair}>CAD/AUD</li>
-              <li className={style.underline}> </li>
-              <li className={style.currencyDelta}>+84,33333</li>
-            </ul>
-          </li>
-
-          <li className={style.realChangeLine}>
-            <ul className={style.currencyLine}>
-              <li className={style.currencyPair}>CHF/ETH</li>
-              <li className={style.underline}> </li>
-              <li className={style.currencyDelta}>+9,1</li>
-            </ul>
-          </li>
-
-          <li className={style.realChangeLine}>
-            <ul className={style.currencyLine}>
-              <li className={style.currencyPair}>JPY/BYR</li>
-              <li className={style.underline}> </li>
-              <li className={style.currencyDelta}>-12,349</li>
-            </ul>
-          </li>
-        </ul>}
-    </>
-  );
+  return <ul className={style.realChange} id='realChange'></ul>;
 };

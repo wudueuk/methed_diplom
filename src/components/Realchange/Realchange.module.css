@@ -1,6 +1,7 @@
 .realChange {
   width: 100%;
   margin-top: 20px;
+  padding-right: 15px;
 }
 
 .realChangeLine {
@@ -22,6 +23,29 @@
   border-bottom: 1px solid #210B36;
 }
 
-.currencyDelta {
+.currencyDeltaRed {
   flex: 0 0 auto;
+  position: relative;
+}
+
+.currencyDeltaGreen {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.currencyDeltaRed::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 5px;
+  border: 5px solid transparent;
+  border-top: 5px solid #F00;
+}
+
+.currencyDeltaGreen::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  border: 5px solid transparent;
+  border-bottom: 5px solid #0F0;
 }
