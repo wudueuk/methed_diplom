@@ -32,6 +32,16 @@
 
 .sortParam {
   padding-left: 20px;
+  background-color: #210B36;
+  color: #FFF;
+  text-align: right;
+  border: 0;
+}
+
+.sortParam:hover,
+.sortParam:active,
+.sortParam:focus {
+  border: 0;
 }
 
 .accountsList {

@@ -15,23 +15,26 @@ export const accountsSlice = createSlice({
     createAccount: (state, action) => {
       state.accounts.push(action.payload);
     },
+    updateAccounts: (state, action) => {
+      state.accounts = action.payload;
+    },
   },
   extraReducers: {
-    [accountsRequestAsync.pending.type]: (state) => {
+    [accountsRequestAsync.pending]: (state) => {
       state.status = 'loading';
       state.error = '';
     },
-    [accountsRequestAsync.fulfilled.type]: (state, action) => {
+    [accountsRequestAsync.fulfilled]: (state, action) => {
       state.accounts = action.payload.accounts;
       state.error = '';
       state.status = 'loaded';
     },
-    [accountsRequestAsync.rejected.type]: (state, action) => {
+    [accountsRequestAsync.rejected]: (state, action) => {
       state.error = action.error;
       state.status = 'error';
     },
   },
 });
 
-export const {createAccount} = accountsSlice.actions;
+export const {createAccount, updateAccounts} = accountsSlice.actions;
 export default accountsSlice.reducer;

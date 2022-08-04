@@ -5,7 +5,11 @@ import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import axios from 'axios';
 import {API_URL} from '../../api/const';
+import classNames from 'classnames';
 import Transaction from '../../components/Transaction';
+import CircleLoader from 'react-spinners/CircleLoader';
+import DetailChart from '../../components/DetailChart';
+import AccountStatistic from '../../components/AccountStatistic';
 
 export const Detail = () => {
   const token = useSelector(state => state.token.token);
@@ -86,6 +90,11 @@ export const Detail = () => {
       .catch((error) => console.log(error.message));
   };
 
+  const override = {
+    display: 'block',
+    margin: '0 auto'
+  };
+
   return (
     <div className={style.detail}>
       <div className={style.titleBox}>
@@ -96,12 +105,32 @@ export const Detail = () => {
 
       <div className={style.detailInner}>
         <div className={style.innerBlock}>
-          <h2 className={style.innerTitle}> </h2>
-          <div className={style.innerBody}></div>
+          <h2 className={classNames(style.innerTitle, style.hidden)}>
+            Динамика
+          </h2>
+          <div className={style.innerBody}>
+            {loaded ? <DetailChart value={account} /> :
+              (<CircleLoader color='#FFF' size='250px'
+                cssOverride={override} />)}
+          </div>
+
+          <div className={style.innerBlock}>
+            <h2 className={classNames(style.innerTitle, style.marginTop)}>
+              Статистика
+            </h2>
+            {loaded ? <AccountStatistic value={account} /> :
+              (<CircleLoader color='#FFF' size='250px'
+                cssOverride={override} />)}
+          </div>
         </div>
+
         <div className={style.innerBlock}>
           <h2 className={style.innerTitle}>История переводов</h2>
-          {loaded ? <Transaction value={account} /> : 'loading'}
+          <div className={style.history}>
+            {loaded ? <Transaction value={account} /> :
+              (<CircleLoader color='#FFF' size='250px'
+                cssOverride={override} />)}
+          </div>
         </div>
       </div>
 

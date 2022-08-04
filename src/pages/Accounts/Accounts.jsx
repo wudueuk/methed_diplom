@@ -5,7 +5,8 @@ import Account from '../../components/Account';
 import {useDispatch, useSelector} from 'react-redux';
 import {Navigate} from 'react-router-dom';
 import {accountsRequestAsync} from '../../store/accounts/accountsAction';
-import {createAccount} from '../../store/accounts/accountsSlice';
+import {createAccount, updateAccounts}
+  from '../../store/accounts/accountsSlice';
 import CircleLoader from 'react-spinners/CircleLoader';
 import axios from 'axios';
 import {API_URL} from '../../api/const';
@@ -20,6 +21,37 @@ export const Accounts = () => {
   useEffect(() => {
     token ? dispatch(accountsRequestAsync()) : '';
   }, [token]);
+
+  const handleSortChange = (e) => {
+    const param = e.target.value;
+    if (!param) return;
+
+    const tmp = [...accounts];
+
+    if (param === 'transaction') {
+      tmp.sort((a, b) => {
+        if (a.transactions.date < b.transactions.date) {
+          return 1;
+        }
+        if (a.transactions.date > b.transactions.date) {
+          return -1;
+        }
+        return 0;
+      });
+    } else {
+      tmp.sort((a, b) => {
+        if (a[param] < b[param]) {
+          return 1;
+        }
+        if (a[param] > b[param]) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+
+    dispatch(updateAccounts(tmp));
+  };
 
   const createNewAccount = async () => {
     axios({
@@ -52,8 +84,14 @@ export const Accounts = () => {
           <div className={style.listHeader}>
             <h3 className={style.listTitle}>Мои счета</h3>
             <div>
-              <span>Сортировка:</span>
-              <span className={style.sortParam}>По дате</span>
+              <span>Сортировка по:</span>
+              <select className={style.sortParam}
+                onChange={handleSortChange}>
+                <option value=''>-</option>
+                <option value='account'>номеру счета</option>
+                <option value='balance'>балансу</option>
+                <option value='transaction'>последней транзакции</option>
+              </select>
             </div>
           </div>
           <div className={style.accountsList}>

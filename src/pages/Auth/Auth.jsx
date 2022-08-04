@@ -12,11 +12,37 @@ export const Auth = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const user = location?.state?.user || '';
   const passwd = location?.state?.passwd || '';
 
   const [logined, setLogined] = useState(false);
-  const [error, setError] = useState('');
+  const [connectError, setConnectError] = useState('');
+  const [loginError, setLoginError] = useState('');
+
+  const echoErrorMessage = message => {
+    let outMessage = '';
+
+    switch (message) {
+      case 'Invalid password':
+        outMessage = 'Неверный пароль';
+        break;
+      case 'No such user':
+        outMessage = 'Пользователь с указанным именем не зарегистрирован';
+        break;
+      case 'Network Error':
+        outMessage = 'Не удается подключиться к серверу';
+        break;
+      default:
+        outMessage = 'Непредвиденная ошибка, обратитесь к администратору';
+    }
+    return (
+      <>
+        <h2 className={style.error}>Ошибка</h2>
+        <p>{outMessage}</p>
+      </>
+    );
+  };
 
   useEffect(() => {
     if (user !== '' && passwd !== '') {
@@ -31,17 +57,28 @@ export const Auth = () => {
         .then(({
           data: {
             payload: {token},
+            error,
           },
         }) => {
-          dispatch(updateToken(token));
-          dispatch(updateUser(user));
-          setLogined(true);
+          if (error === '') {
+            dispatch(updateToken(token));
+            dispatch(updateUser(user));
+            setLogined(true);
+          } else {
+            setLoginError(error);
+          }
         })
         .catch((error) => {
-          setError(error);
+          setConnectError(error.message);
         });
     } else navigate('/');
   }, []);
+
+  useEffect(() => {
+    if (logined) {
+      navigate('/');
+    }
+  }, [logined]);
 
   const override = {
     display: 'block',
@@ -50,12 +87,10 @@ export const Auth = () => {
 
   return (
     <>
-      {logined ? navigate('/') :
-        error ? (<>
-          <h2 className={style.error}>Ошибка</h2>
-          <p>{error.message}</p>
-        </>) : (<CircleLoader color='#FFF' size='250px'
-          cssOverride={override} />)
+      {!logined ? connectError ? echoErrorMessage(connectError) :
+        loginError ? echoErrorMessage(loginError) :
+          (<CircleLoader color='#FFF' size='250px'
+            cssOverride={override} />) : <></>
       }
     </>
   );
