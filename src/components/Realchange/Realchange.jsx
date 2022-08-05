@@ -1,9 +1,9 @@
 import style from './Realchange.module.css';
 import {useRef, useEffect, useCallback} from 'react';
 
-let count = 0;
-
 export const Realchange = () => {
+  let count = 0;
+
   const ws = useRef(null);
 
   const gettingData = useCallback(() => {

@@ -18,6 +18,7 @@
   background-color: #392350;
   border-radius: 10px;
   padding: 16px 20px;
+  min-height: 150px;
 }
 
 .box {
@@ -75,9 +76,10 @@
   border: 2px solid #B865D6;
 }
 
-.left {
-  position: relative;
-  height: 37px;
+.infoGroup {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .bold {
@@ -85,7 +87,6 @@
 }
 
 .submit {
-  position: absolute;
   font-size: 18px;
   width: 147px;
   height: 37px;
@@ -100,4 +101,17 @@
 .userCurrencies {
   display: inline-block;
   width: 50px;
+}
+
+.exchangeMessageError,
+.exchangeMessageOk {
+  width: 50%;
+}
+
+.exchangeMessageError {
+  color: tomato;
+}
+
+.exchangeMessageOk {
+  color: greenyellow;
 }

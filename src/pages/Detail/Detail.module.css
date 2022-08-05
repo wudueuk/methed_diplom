@@ -25,6 +25,10 @@
   margin-top: 70px;
 }
 
+.innerBlock {
+  width: 100%;
+}
+
 .innerTitle {
   font-size: 26px;
   margin-bottom: 20px;
@@ -48,7 +52,7 @@
 
 .transitionTitle {
   font-size: 26px;
-  margin-bottom: 40px;
+  margin: 40px 0px;
 }
 
 .transition {
@@ -62,7 +66,7 @@
   display: flex;
   flex-direction: column;
   padding: 0;
-  flex: 0 1 auto;
+  width: 100%;
 }
 
 .label {
@@ -78,7 +82,7 @@
   border: 2px solid #FFF;
   border-radius: 10px;
   padding: 10px 5px;
-  font-size: 36px;
+  font-size: 26px;
 }
 
 .input:focus,
@@ -128,4 +132,18 @@
 
 .history::-webkit-scrollbar-button:vertical:end:increment {
   background-color: transparent;
+}
+
+.doughnut {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.transfertMessageError {
+  color: tomato;
+}
+
+.transfertMessageOk {
+  color: greenyellow;
 }

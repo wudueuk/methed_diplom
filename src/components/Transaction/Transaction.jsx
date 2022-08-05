@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export const Transaction = ({value}) => {
-  const count = () => Math.floor(Math.random(1) * Date.now());
-
   const deposite = (from, to) => (from === value.account ? to : from);
 
-  const balance = (from, to) => (from === value.account ? -1 : 1);
+  const balance = from => (from === value.account ? -1 : 1);
 
   return (
     <table className={style.table}>
@@ -22,12 +20,12 @@ export const Transaction = ({value}) => {
         {value.transactions.map(item => {
           const date = new Date(item.date);
           return (
-            <tr key={count()}>
+            <tr key={Math.floor(Math.random(1) * Date.now())}>
               <td className={style.tableCell}>
                 {deposite(item.from, item.to)}
               </td>
               <td className={
-                balance(item.from, item.to) > 0 ? style.tableCell :
+                balance(item.from) > 0 ? style.tableCell :
                   classNames(style.tableCell, style.negative)
               }>
                 {item.amount * balance(item.from, item.to)}

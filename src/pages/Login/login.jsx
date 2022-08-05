@@ -43,6 +43,12 @@ export const Login = () => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (<>
     {token ? navigate('/') : (
       <div className={style.body}>
@@ -50,14 +56,17 @@ export const Login = () => {
         <div className={style.group}>
           <label className={style.label}>Логин</label>
           <input className={style.input} name='login' type='text'
-            value={userName} onChange={handleUserChange} />
+            value={userName} onChange={handleUserChange}
+            tabIndex={1} />
         </div>
         <div className={style.group}>
           <label className={style.label}>Пароль</label>
           <input className={style.input} name='passwd' type='password'
-            value={userPasswd} onChange={handlePasswdChange} />
+            value={userPasswd} onChange={handlePasswdChange}
+            tabIndex={2} onKeyDown={handleKeyDown} />
         </div>
-        <div onClick={handleSubmit}>
+        <div className={style.buttonBox} onClick={handleSubmit}
+          onKeyDown={handleKeyDown} tabIndex={3}>
           <Button value='Войти' styles={style.button} />
         </div>
       </div>

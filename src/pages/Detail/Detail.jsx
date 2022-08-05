@@ -17,8 +17,10 @@ export const Detail = () => {
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
   const [account, setAccount] = useState(null);
-  const [accountChange, setAccountChange] = useState(null);
+  const [distAccount, setDistAccount] = useState(null);
   const [amount, setAmount] = useState(null);
+  const [moneyTransfert, setMoneyTransfert] = useState(false);
+  const [transfertMessage, setTransfertMessage] = useState('');
 
   const goBack = () => navigate(-1);
 
@@ -38,7 +40,7 @@ export const Detail = () => {
   }, [id]);
 
   const handleAccountChange = (e) => {
-    setAccountChange(e.target.value);
+    setDistAccount(e.target.value);
   };
 
   const handleAmountChange = (e) => {
@@ -49,9 +51,9 @@ export const Detail = () => {
     axios({
       method: 'post',
       url: `${API_URL}/transfer-funds`,
-      params: {
-        from: id,
-        to: accountChange,
+      data: {
+        from: account.account,
+        to: distAccount,
         amount,
       },
       headers: {
@@ -62,6 +64,7 @@ export const Detail = () => {
         let message = '';
         if (data.payload) {
           message = 'Перевод успешно осуществлен';
+          setMoneyTransfert(true);
         } else if (data.error) {
           switch (data.error) {
             case 'Invalid account from':
@@ -83,9 +86,9 @@ export const Detail = () => {
             default:
               message = 'Непредвиденная ошибка!';
           }
+          setMoneyTransfert(false);
         }
-        alert(message);
-        data.payload ? alert('Перевод осуществлен') : 'Error';
+        setTransfertMessage(message);
       })
       .catch((error) => console.log(error.message));
   };
@@ -118,9 +121,11 @@ export const Detail = () => {
             <h2 className={classNames(style.innerTitle, style.marginTop)}>
               Статистика
             </h2>
-            {loaded ? <AccountStatistic value={account} /> :
-              (<CircleLoader color='#FFF' size='250px'
-                cssOverride={override} />)}
+            <div className={style.doughnut}>
+              {loaded ? <AccountStatistic value={account} /> :
+                (<CircleLoader color='#FFF' size='250px'
+                  cssOverride={override} />)}
+            </div>
           </div>
         </div>
 
@@ -139,18 +144,26 @@ export const Detail = () => {
         <div className={style.group}>
           <label className={style.label}>Счет</label>
           <input className={style.input}
-            onChange={handleAccountChange}></input>
+            onChange={handleAccountChange}
+            onFocus={() => {
+              setTransfertMessage('');
+            }}></input>
         </div>
         <div className={style.group}>
           <label className={style.label}>Сумма</label>
           <input className={style.input}
-            onChange={handleAmountChange}></input>
+            onChange={handleAmountChange}
+            onFocus={() => {
+              setTransfertMessage('');
+            }}></input>
         </div>
         <div className={style.group}>
           <Button value='Перевести' styles={style.submit}
             onclick={transfert} />
         </div>
       </div>
+      <p className={moneyTransfert ? style.transfertMessageOk :
+        style.transfertMessageError}>{transfertMessage}</p>
     </div>
   );
 };

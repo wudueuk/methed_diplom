@@ -30,10 +30,10 @@ export const Accounts = () => {
 
     if (param === 'transaction') {
       tmp.sort((a, b) => {
-        if (a.transactions.date < b.transactions.date) {
+        if (a.transactions[0].date < b.transactions[0].date) {
           return 1;
         }
-        if (a.transactions.date > b.transactions.date) {
+        if (a.transactions[0].date > b.transactions[0].date) {
           return -1;
         }
         return 0;
@@ -95,7 +95,8 @@ export const Accounts = () => {
             </div>
           </div>
           <div className={style.accountsList}>
-            {accounts.map(elem => <Account key={elem.account} data={elem} />)}
+            {accounts.map(elem => <Account key={elem.account}
+              data={elem} />)}
           </div>
         </div>
       ) : <CircleLoader color='#FFF' size='250px'

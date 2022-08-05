@@ -47,7 +47,7 @@ export const UserCurrencies = () => {
               {elem.code}
             </span>
             <span className={classNames(style.userCurrencies, style.bold)}>
-              {elem.amount}
+              {elem.amount.toFixed(2)}
             </span>
           </li>
         ) : (<li><span>Счета отсутствуют</span></li>)

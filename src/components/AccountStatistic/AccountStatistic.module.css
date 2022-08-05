@@ -1,0 +1,54 @@
+.doughnutLabel {
+  text-align: left;
+  margin-right: 20px;
+}
+
+.doughnutLabel>p {
+  margin-bottom: 20px;
+}
+
+.doughnutElement {
+  max-width: 220px;
+  max-height: 220px;
+}
+
+.doughnutLegend {
+  display: flex;
+  margin-left: 20px;
+}
+
+.doughnutLegend>div {
+  margin-left: 20px;
+}
+
+.doughnutLegend>div>p {
+  padding-bottom: 20px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.doughnutLegendUp,
+.doughnutLegendDown {
+  position: relative;
+}
+
+.doughnutLegendUp::before,
+.doughnutLegendDown::before {
+  position: absolute;
+  top: 0;
+  left: -25px;
+  content: '';
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.doughnutLegendUp::before {
+  background-color: #4B00CA;
+}
+
+.doughnutLegendDown::before {
+  background-color: #B865D6;
+}
