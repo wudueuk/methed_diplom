@@ -2,7 +2,6 @@ import style from './AccountStatistic.module.css';
 import PropTypes from 'prop-types';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 import {Doughnut} from 'react-chartjs-2';
-/* import classNames from 'classnames'; */
 
 export const AccountStatistic = ({value}) => {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -65,9 +64,9 @@ export const AccountStatistic = ({value}) => {
           <p className={style.doughnutLegendDown}>Расходы</p>
         </div>
         <div>
-          <p className={style.bold}>{value.balance} ₽</p>
-          <p className={style.bold}>{userData[0]} ₽</p>
-          <p className={style.bold}>{userData[1]} ₽</p>
+          <p className={style.bold}>{value.balance.toFixed(2)} ₽</p>
+          <p className={style.bold}>{userData[0].toFixed(2)} ₽</p>
+          <p className={style.bold}>{userData[1].toFixed(2)} ₽</p>
         </div>
       </div>
     </>

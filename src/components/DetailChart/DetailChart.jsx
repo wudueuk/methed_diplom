@@ -76,27 +76,57 @@ export const DetailChart = ({value}) => {
   };
 
   const mathAmount = data => {
+    const startTime = Date.now() - 1000 * 3600 * 24 * 180;
+    const startMonth = new Date(startTime).getMonth();
+    const startYear = new Date(startTime).getFullYear();
+    const todayMonth = new Date().getMonth();
+    const todayYear = new Date(startTime).getFullYear();
     let prevMonth = '';
+    let prevYear = '';
     let amount = 0;
-    const transactionDate = [];
+    const transaction = [];
     data.map(item => {
-      const currentDate = new Date(item.date);
+      const currentMonth = new Date(item.date).getMonth();
+      const currentYear = new Date(item.date).getFullYear();
 
-      if (prevMonth !== '') {
-        if (currentDate.getMonth() === prevMonth) {
-          amount += item.amount;
-        } else {
-          transactionDate.push({
-            month: prevMonth,
-            amount,
-          });
-          amount = 0;
-          prevMonth = currentDate.getMonth();
+      if (prevMonth !== '' && prevYear !== '') {
+        if ((currentYear === startYear && currentMonth > startMonth) ||
+          (currentYear === todayYear && currentMonth <= todayMonth)) {
+          if (currentMonth === prevMonth) {
+            amount += item.amount;
+          } else {
+            amount += item.amount;
+            transaction.push({
+              month: prevMonth,
+              amount,
+            });
+            amount = 0;
+            prevMonth = currentMonth;
+            prevYear = currentYear;
+          }
         }
-      } else prevMonth = currentDate.getMonth();
+      } else {
+        if ((currentYear === startYear && currentMonth > startMonth) ||
+          (currentYear === todayYear && currentMonth <= todayMonth)) {
+          prevMonth = currentMonth;
+          prevYear = currentYear;
+          amount += item.amount;
+        }
+      }
     });
 
-    return transactionDate;
+    const returnData = transaction.sort((a, b) => {
+      if (a.month < b.month) {
+        return -1;
+      }
+      if (a.month > b.month) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(returnData);
+
+    return returnData;
   };
 
   const userData = mathAmount(value.transactions);

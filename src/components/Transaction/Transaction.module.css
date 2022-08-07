@@ -1,38 +1,53 @@
-.table {
+.transitionTitle {
+  font-size: 26px;
+  margin: 40px 0px;
+}
+
+.transition {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
   width: 100%;
-  margin-bottom: 10px;
 }
 
-.tableHead {
-  font-size: 15px;
-  font-weight: 400;
-  text-align: left;
-  padding: 15px 0px 15px 15px;
-  border-right: 1px solid #210B36;
-  border-bottom: 2px solid #210B36;
+.label {
+  padding-left: 20px;
+  line-height: 1.5;
 }
 
-.tableHead:last-child {
-  border-right: none;
+.input {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 70px;
+  background-color: #FFF;
+  border: 2px solid #FFF;
+  border-radius: 10px;
+  padding: 10px 5px;
+  font-size: 26px;
 }
 
-.tableHead:first-child {
-  padding-left: 0px;
+.input:focus,
+.input:hover {
+  border: 2px solid #B865D6;
 }
 
-.tableCell {
-  padding: 15px 0px 15px 15px;
-  border-right: 1px solid #210B36;
+.submit {
+  font-size: 18px;
+  width: 380px;
+  height: 70px;
 }
 
-.tableCell:first-child {
-  padding-left: 0px;
+.transfertMessageError {
+  color: tomato;
 }
 
-.tableCell:last-child {
-  border-right: none;
-}
-
-.negative {
-  color: #B865D6;
+.transfertMessageOk {
+  color: greenyellow;
 }

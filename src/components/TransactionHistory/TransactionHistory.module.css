@@ -1,0 +1,38 @@
+.table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.tableHead {
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
+  padding: 15px 0px 15px 15px;
+  border-right: 1px solid #210B36;
+  border-bottom: 2px solid #210B36;
+}
+
+.tableHead:last-child {
+  border-right: none;
+}
+
+.tableHead:first-child {
+  padding-left: 0px;
+}
+
+.tableCell {
+  padding: 15px 0px 15px 15px;
+  border-right: 1px solid #210B36;
+}
+
+.tableCell:first-child {
+  padding-left: 0px;
+}
+
+.tableCell:last-child {
+  border-right: none;
+}
+
+.negative {
+  color: #B865D6;
+}

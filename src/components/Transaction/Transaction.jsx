@@ -1,45 +1,113 @@
 import style from './Transaction.module.css';
+import {useRef, useState} from 'react';
+import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import axios from 'axios';
+import {API_URL} from '../../api/const';
+import Button from '../Button';
 
-export const Transaction = ({value}) => {
-  const deposite = (from, to) => (from === value.account ? to : from);
+export const Transaction = ({account}) => {
+  const token = useSelector(state => state.token.token);
+  const [moneyTransfert, setMoneyTransfert] = useState(false);
+  const [transfertMessage, setTransfertMessage] = useState('');
+  const inputToRef = useRef(null);
+  const [inputTo, setInputTo] = useState('');
+  const inputAmountRef = useRef(null);
+  const [inputAmount, setInputAmount] = useState('');
 
-  const balance = from => (from === value.account ? -1 : 1);
+  const handleChangeTo = (e) => {
+    if (/\D/.test(e.target.value)) {
+      inputToRef.current.value = inputTo;
+    } else {
+      setInputTo(e.target.value);
+    }
+  };
 
-  return (
-    <table className={style.table}>
-      <thead>
-        <tr>
-          <th width='50%' className={style.tableHead}>Счет</th>
-          <th width='25%' className={style.tableHead}>Сумма</th>
-          <th width='25%' className={style.tableHead}>Дата</th>
-        </tr>
-      </thead>
-      <tbody>
-        {value.transactions.map(item => {
-          const date = new Date(item.date);
-          return (
-            <tr key={Math.floor(Math.random(1) * Date.now())}>
-              <td className={style.tableCell}>
-                {deposite(item.from, item.to)}
-              </td>
-              <td className={
-                balance(item.from) > 0 ? style.tableCell :
-                  classNames(style.tableCell, style.negative)
-              }>
-                {item.amount * balance(item.from, item.to)}
-              </td>
-              <td className={style.tableCell}>
-                {date.toLocaleDateString()}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
+  const handleChangeAmount = (e) => {
+    if (/^[0-9]*\.?[0-9]{0,2}$/.test(e.target.value)) {
+      setInputAmount(e.target.value);
+    } else {
+      inputAmountRef.current.value = inputAmount;
+    }
+  };
+
+  const transfert = async () => {
+    axios({
+      method: 'post',
+      url: `${API_URL}/transfer-funds`,
+      data: {
+        from: account,
+        to: inputTo,
+        amount: inputAmount,
+      },
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    })
+      .then(({data}) => {
+        let message = '';
+        if (data.payload) {
+          message = 'Перевод успешно осуществлен';
+          setMoneyTransfert(true);
+        } else if (data.error) {
+          switch (data.error) {
+            case 'Invalid account from':
+              message = `Не указан адрес счёта списания,
+              или этот счёт не принадлежит нам`;
+              break;
+            case 'Invalid account to':
+              message = `Не указан счёт зачисления, или этого счёта
+              не существует`;
+              break;
+            case 'Invalid amount':
+              message = `Не указана сумма перевода, или она
+              отрицательная`;
+              break;
+            case 'Overdraft prevented':
+              message = `Мы попытались перевести больше денег, чем доступно
+              на счёте списания`;
+              break;
+            default:
+              message = 'Непредвиденная ошибка!';
+          }
+          setMoneyTransfert(false);
+        }
+        setTransfertMessage(message);
+      })
+      .catch((error) => console.log(error.message));
+  };
+
+  return (<>
+    <h3 className={style.transitionTitle}>Перевод</h3>
+    <div className={style.transition}>
+      <div className={style.group}>
+        <label className={style.label}>Счет</label>
+        <input className={style.input}
+          ref={inputToRef}
+          onChange={handleChangeTo}
+          onFocus={() => {
+            setTransfertMessage('');
+          }}></input>
+      </div>
+      <div className={style.group}>
+        <label className={style.label}>Сумма</label>
+        <input className={style.input}
+          ref={inputAmountRef}
+          onChange={handleChangeAmount}
+          onFocus={() => {
+            setTransfertMessage('');
+          }}></input>
+      </div>
+      <div className={style.group}>
+        <Button value='Перевести' styles={style.submit}
+          onclick={transfert} />
+      </div>
+    </div>
+    <p className={moneyTransfert ? style.transfertMessageOk :
+      style.transfertMessageError}>{transfertMessage}</p>
+  </>);
 };
 
 Transaction.propTypes = {
-  value: PropTypes.object,
+  account: PropTypes.string,
 };

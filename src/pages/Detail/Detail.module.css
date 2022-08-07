@@ -50,52 +50,6 @@
   padding: 20px;
 }
 
-.transitionTitle {
-  font-size: 26px;
-  margin: 40px 0px;
-}
-
-.transition {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.group {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  width: 100%;
-}
-
-.label {
-  padding-left: 20px;
-  line-height: 1.5;
-}
-
-.input {
-  width: 100%;
-  margin-bottom: 20px;
-  height: 70px;
-  background-color: #FFF;
-  border: 2px solid #FFF;
-  border-radius: 10px;
-  padding: 10px 5px;
-  font-size: 26px;
-}
-
-.input:focus,
-.input:hover {
-  border: 2px solid #B865D6;
-}
-
-.submit {
-  font-size: 18px;
-  width: 380px;
-  height: 70px;
-}
-
 .history {
   position: relative;
   background-color: #392350;
@@ -138,12 +92,4 @@
   display: flex;
   align-items: center;
   width: 100%;
-}
-
-.transfertMessageError {
-  color: tomato;
-}
-
-.transfertMessageOk {
-  color: greenyellow;
 }
