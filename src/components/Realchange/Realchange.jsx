@@ -1,6 +1,7 @@
 import style from './Realchange.module.css';
 import {useRef, useEffect, useCallback} from 'react';
 import {useSelector} from 'react-redux';
+import {API_WS} from '../../api/const';
 
 export const Realchange = () => {
   const token = useSelector(state => state.token.token);
@@ -57,7 +58,7 @@ export const Realchange = () => {
   }, [ws]);
 
   useEffect(() => {
-    ws.current = new WebSocket('ws://localhost:3001/currency-feed');
+    ws.current = new WebSocket(API_WS);
     gettingData();
     return () => ws.current.close();
   }, [ws]);

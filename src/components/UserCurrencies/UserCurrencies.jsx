@@ -41,16 +41,20 @@ export const UserCurrencies = () => {
   return (
     <>
       {
-        currencies.length > 0 ? currencies.map(elem =>
-          <li key={elem.code} className={style.userCurrenciesLi}>
-            <span className={style.userCurrencies}>
-              {elem.code}
-            </span>
-            <span className={classNames(style.userCurrencies, style.bold)}>
-              {elem.amount.toFixed(2)}
-            </span>
-          </li>
-        ) : (<li><span>Счета отсутствуют</span></li>)
+        currencies.length > 0 ? currencies.map(elem => {
+          if (elem.amount > 0) {
+            return (
+              <li key={elem.code} className={style.userCurrenciesLi}>
+                <span className={style.userCurrencies}>
+                  {elem.code}
+                </span>
+                <span className={classNames(style.userCurrencies, style.bold)}>
+                  {elem.amount.toFixed(2)}
+                </span>
+              </li>
+            );
+          }
+        }) : (<li><span>Счета отсутствуют</span></li>)
       }
     </>
   );
