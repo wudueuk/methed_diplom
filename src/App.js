@@ -6,8 +6,8 @@ import Login from './pages/Login';
 import Accounts from './pages/Accounts';
 import Detail from './pages/Detail';
 import Exchange from './pages/Exchange';
-import Page404 from './pages/Page404';
 import Exit from './pages/Exit';
+import Page404 from './pages/Page404';
 import Auth from './pages/Auth';
 
 function App() {

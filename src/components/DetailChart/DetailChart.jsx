@@ -124,7 +124,6 @@ export const DetailChart = ({value}) => {
       }
       return 0;
     });
-    console.log(returnData);
 
     return returnData;
   };

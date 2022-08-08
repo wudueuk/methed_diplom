@@ -10,9 +10,10 @@ export const TransactionHistory = ({value}) => {
   const balance = from => (from === value.account ? -1 : 1);
 
   return (
-    <table className={style.table}>
+    <table key={Math.floor(Math.random(1) * Date.now())}
+      className={style.table}>
       <thead>
-        <tr>
+        <tr key={Math.floor(Math.random(1) * Date.now())}>
           <th width='50%' className={style.tableHead}>Счет</th>
           <th width='25%' className={style.tableHead}>Сумма</th>
           <th width='25%' className={style.tableHead}>Дата</th>
@@ -44,7 +45,8 @@ export const TransactionHistory = ({value}) => {
         })
         }
       </tbody>
-    </table >
+
+    </table>
   );
 };
 

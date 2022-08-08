@@ -1,7 +1,11 @@
 import style from './Realchange.module.css';
 import {useRef, useEffect, useCallback} from 'react';
+import {useSelector} from 'react-redux';
 
 export const Realchange = () => {
+  const token = useSelector(state => state.token.token);
+  if (!token) return;
+
   let count = 0;
 
   const ws = useRef(null);

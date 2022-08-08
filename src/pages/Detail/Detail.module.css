@@ -18,6 +18,22 @@
   height: 49px;
 }
 
+.back span {
+  position: relative;
+  display: inline-block;
+}
+
+.back span::before {
+  position: absolute;
+  left: -22px;
+  top: 2px;
+  content: '';
+  width: 16px;
+  height: 16px;
+  background-image: url('img/coolicon.svg');
+  background-repeat: no-repeat;
+}
+
 .detailInner {
   display: grid;
   grid-template-columns: 1fr 1fr;
