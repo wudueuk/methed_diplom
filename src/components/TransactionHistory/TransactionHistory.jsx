@@ -12,21 +12,21 @@ export const TransactionHistory = ({value}) => {
   return (
     <table key={Math.floor(Math.random(1) * Date.now())}
       className={style.table}>
-      <thead>
+      <thead key={Math.floor(Math.random(1) * Date.now())}>
         <tr key={Math.floor(Math.random(1) * Date.now())}>
           <th width='50%' className={style.tableHead}>Счет</th>
           <th width='25%' className={style.tableHead}>Сумма</th>
           <th width='25%' className={style.tableHead}>Дата</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody key={Math.floor(Math.random(1) * Date.now())}>
         {transactions.map(item => {
           const date = new Date(item.date);
           count++;
           return (<>
             {
               count <= 9 ? (
-                <tr key={count} >
+                <tr key={count}>
                   <td className={style.tableCell}>
                     {deposite(item.from, item.to)}
                   </td>
@@ -45,7 +45,6 @@ export const TransactionHistory = ({value}) => {
         })
         }
       </tbody>
-
     </table>
   );
 };
