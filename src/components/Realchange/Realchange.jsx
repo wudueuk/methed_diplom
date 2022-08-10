@@ -5,11 +5,10 @@ import {API_WS} from '../../api/const';
 
 export const Realchange = () => {
   const token = useSelector(state => state.token.token);
+  const ws = useRef(null);
   if (!token) return;
 
   let count = 0;
-
-  const ws = useRef(null);
 
   const gettingData = useCallback(() => {
     if (!ws.current) return;
