@@ -19,7 +19,9 @@ export const Accounts = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    token ? dispatch(accountsRequestAsync()) : '';
+    if (token) {
+      dispatch(accountsRequestAsync());
+    }
   }, [token]);
 
   const handleSortChange = (e) => {
