@@ -5,13 +5,8 @@ import {API_WS} from '../../api/const';
 
 export const Realchange = () => {
   const token = useSelector(state => state.token.token);
-  const myCallback = useCallback();
   const ws = useRef(null);
-  if (!token) return;
-
-  let count = 0;
-
-  const gettingData = myCallback(() => {
+  const gettingData = useCallback(() => {
     if (!ws.current) return;
 
     ws.current.onmessage = e => {
@@ -56,6 +51,10 @@ export const Realchange = () => {
       }
     };
   }, [ws]);
+  
+  if (!token) return;
+
+  let count = 0;
 
   useEffect(() => {
     ws.current = new WebSocket(API_WS);
