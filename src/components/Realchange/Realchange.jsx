@@ -1,10 +1,8 @@
 import style from './Realchange.module.css';
 import {useRef, useEffect, useCallback} from 'react';
-import {useSelector} from 'react-redux';
 import {API_WS} from '../../api/const';
 
 export const Realchange = () => {
-  const token = useSelector(state => state.token.token);
   const ws = useRef(null);
   const gettingData = useCallback(() => {
     if (!ws.current) return;
@@ -54,8 +52,6 @@ export const Realchange = () => {
     };
   }, [ws]);
   
-  if (!token) return;
-
   useEffect(() => {
     ws.current = new WebSocket(API_WS);
     gettingData();
