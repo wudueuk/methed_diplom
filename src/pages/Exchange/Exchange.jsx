@@ -11,14 +11,14 @@ import {API_URL} from '../../api/const';
 
 export const Exchange = () => {
   const token = useSelector(state => state.token.token);
-  if (!token) return;
-
   const currencies = useCurrencies();
   const [amount, setAmount] = useState(0);
   const [exchange, setExchange] = useState(false);
   const [exchangeMessage, setExchangeMessage] = useState('');
   const selectFrom = useRef(null);
   const selectTo = useRef(null);
+
+  if (!token) return;
 
   const handleChangeAmount = e => {
     setAmount(e.target.value);
