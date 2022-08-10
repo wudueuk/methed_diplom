@@ -8,6 +8,8 @@ export const Realchange = () => {
   const ws = useRef(null);
   const gettingData = useCallback(() => {
     if (!ws.current) return;
+    
+    let count = 0;
 
     ws.current.onmessage = e => {
       const message = JSON.parse(e.data);
@@ -53,8 +55,6 @@ export const Realchange = () => {
   }, [ws]);
   
   if (!token) return;
-
-  let count = 0;
 
   useEffect(() => {
     ws.current = new WebSocket(API_WS);
