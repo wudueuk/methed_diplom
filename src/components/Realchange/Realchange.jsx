@@ -11,8 +11,11 @@ export const Realchange = () => {
 
   let count = 0;
 
+  const ws = useRef(null);
   const gettingData = useCallback(() => {
     if (!ws.current) return;
+
+    let count = 0;
 
     ws.current.onmessage = e => {
       const message = JSON.parse(e.data);

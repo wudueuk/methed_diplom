@@ -111,3 +111,4 @@ export const Transaction = ({account}) => {
 Transaction.propTypes = {
   account: PropTypes.string,
 };
+
