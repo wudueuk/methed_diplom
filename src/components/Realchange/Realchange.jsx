@@ -1,18 +1,13 @@
 import style from './Realchange.module.css';
 import {useRef, useEffect, useCallback} from 'react';
 import {API_WS} from '../../api/const';
-import {useToken} from '../../hooks/useToken';
 
 export const Realchange = () => {
-  const token = useToken();
   const ws = useRef(null);
-
-  if (!token) return;
-
-  let count = 0;
-
   const gettingData = useCallback(() => {
     if (!ws.current) return;
+
+    let count = 0;
 
     ws.current.onmessage = e => {
       const message = JSON.parse(e.data);
