@@ -2,7 +2,6 @@ import style from './Detail.module.css';
 import Button from '../../components/Button';
 import {useParams, useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
 import axios from 'axios';
 import {API_URL} from '../../api/const';
 import classNames from 'classnames';
@@ -11,9 +10,10 @@ import Transaction from '../../components/Transaction';
 import CircleLoader from 'react-spinners/CircleLoader';
 import DetailChart from '../../components/DetailChart';
 import AccountStatistic from '../../components/AccountStatistic';
+import {useToken} from '../../hooks/useToken';
 
 export const Detail = () => {
-  const token = useSelector(state => state.token.token);
+  const token = useToken();
   const {id} = useParams();
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
