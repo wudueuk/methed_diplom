@@ -1,10 +1,10 @@
 import style from './Menu.module.css';
 import {NavLink} from 'react-router-dom';
 import classNames from 'classnames';
-import {useSelector} from 'react-redux';
+import {useToken} from '../../../hooks/useToken';
 
 export const Menu = () => {
-  const token = useSelector(state => state.token.token);
+  const token = useToken();
 
   return (
     <>
@@ -27,3 +27,4 @@ export const Menu = () => {
 
   );
 };
+
