@@ -1,11 +1,11 @@
 import style from './Login.module.css';
 import Button from '../../components/Button';
-import {useSelector} from 'react-redux';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {useToken} from '../../hooks/useToken';
 
 export const Login = () => {
-  const token = useSelector(state => state.token.token);
+  const token = useToken();
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [userPasswd, setUserPasswd] = useState('');

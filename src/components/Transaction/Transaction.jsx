@@ -1,13 +1,13 @@
 import style from './Transaction.module.css';
 import {useRef, useState} from 'react';
-import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {API_URL} from '../../api/const';
 import Button from '../Button';
+import {useToken} from '../../hooks/useToken';
 
 export const Transaction = ({account}) => {
-  const token = useSelector(state => state.token.token);
+  const token = useToken();
   const [moneyTransfert, setMoneyTransfert] = useState(false);
   const [transfertMessage, setTransfertMessage] = useState('');
   const inputToRef = useRef(null);

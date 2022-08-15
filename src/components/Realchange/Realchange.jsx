@@ -1,10 +1,10 @@
 import style from './Realchange.module.css';
 import {useRef, useEffect, useCallback} from 'react';
-import {useSelector} from 'react-redux';
 import {API_WS} from '../../api/const';
+import {useToken} from '../../hooks/useToken';
 
 export const Realchange = () => {
-  const token = useSelector(state => state.token.token);
+  const token = useToken();
   const ws = useRef(null);
 
   if (!token) return;

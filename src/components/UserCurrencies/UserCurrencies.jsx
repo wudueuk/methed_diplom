@@ -1,13 +1,14 @@
 import style from './UserCurrencies.module.css';
 import classNames from 'classnames';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import {API_URL} from '../../api/const';
 import {updateUserCurrencies} from '../../store/userReducer';
+import {useToken} from '../../hooks/useToken';
 
 export const UserCurrencies = () => {
-  const token = useSelector(state => state.token.token);
+  const token = useToken();
   const dispatch = useDispatch();
   const [currencies, setCurrencies] = useState([]);
 

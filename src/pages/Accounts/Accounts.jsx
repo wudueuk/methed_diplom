@@ -8,11 +8,12 @@ import {accountsRequestAsync} from '../../store/accounts/accountsAction';
 import {createAccount, updateAccounts}
   from '../../store/accounts/accountsSlice';
 import CircleLoader from 'react-spinners/CircleLoader';
+import {useToken} from '../../hooks/useToken';
 import axios from 'axios';
 import {API_URL} from '../../api/const';
 
 export const Accounts = () => {
-  const token = useSelector(state => state.token.token);
+  const token = useToken();
   const user = useSelector(state => state.user.user);
   const accounts = useSelector(state => state.accounts.accounts);
   const status = useSelector(state => state.accounts.status);

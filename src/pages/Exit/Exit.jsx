@@ -5,7 +5,8 @@ import {updateToken} from '../../store/token/tokenReducer';
 export const Exit = () => {
   const dispatch = useDispatch();
 
-  dispatch(updateToken(false));
+  dispatch(updateToken(''));
+  sessionStorage.clear();
 
   return <Navigate to='/login' replace={true} />;
 };

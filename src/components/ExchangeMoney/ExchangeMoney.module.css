@@ -1,0 +1,96 @@
+.innerBlock {
+  background-color: #392350;
+  border-radius: 10px;
+  padding: 16px 20px;
+  min-height: 150px;
+}
+
+.innerTitle {
+  font-size: 20px;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.label {
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.select,
+.input {
+  width: 160px;
+  margin-bottom: 20px;
+  height: 37px;
+  background-color: #FFF;
+  border: 2px solid #FFF;
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.input:focus,
+.input:hover {
+  border: 2px solid #B865D6;
+}
+
+.infoGroup {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.submit {
+  font-size: 18px;
+  width: 147px;
+  height: 37px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.exchangeMessageError,
+.exchangeMessageOk {
+  width: 50%;
+}
+
+.exchangeMessageError {
+  color: tomato;
+}
+
+.exchangeMessageOk {
+  color: greenyellow;
+}
+
+.balance {
+  padding: 20px;
+}
+
+.balanceTitle {
+  font-size: 15px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.userCurrenciesLi {
+  margin-bottom: 15px;
+}
+
+.userCurrencies {
+  display: inline-block;
+  width: 50px;
+}
+
+.bold {
+  font-weight: 700;
+}
