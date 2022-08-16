@@ -16,11 +16,6 @@ export const updateUser = user => ({
   user,
 });
 
-export const updateUserName = user => ({
-  type: UPDATE_USER_NAME,
-  user,
-});
-
 export const updateUserCurrencies = currencies => ({
   type: UPDATE_USER_CURRENCIES,
   currencies,

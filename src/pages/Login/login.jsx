@@ -50,7 +50,7 @@ export const Login = () => {
   };
 
   return (<>
-    {token ? navigate('/') : (
+    {!token ? (
       <div className={style.body}>
         <h2 className={formTitleStyle}>{formTitle}</h2>
         <div className={style.group}>
@@ -70,7 +70,7 @@ export const Login = () => {
           <Button value='Войти' styles={style.button} />
         </div>
       </div>
-    )
+    ) : ''
     }
   </>);
 };

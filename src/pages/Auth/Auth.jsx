@@ -63,6 +63,7 @@ export const Auth = () => {
           if (error === '') {
             dispatch(updateToken(token));
             sessionStorage.setItem('token', token);
+            sessionStorage.setItem('user', user);
             dispatch(updateUser(user));
             setLogined(true);
           } else {
